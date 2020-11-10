@@ -1,0 +1,75 @@
+"game601" by Mike Treanor
+
+[This is what you need to export for the web]
+Release along with the "Quixe" interpreter.
+
+
+
+
+
+[In this section, I deal with global hunger replated stuff]
+The player has a number called hunger. The hunger of the player is 10.
+
+Every turn when the hunger of the player is greater than 10:
+		say "Your tummy grumbles";
+		
+Every turn:
+		now the hunger of the player is the hunger of the player + 1;
+		say "Your hunger is: [hunger of the player]";
+		
+Every turn when the hunger of the player is less than 1:
+		end the story.
+		
+
+
+
+
+[Create the initial ticket booth room, and Jar Jar Binks who you need to ask about admission in order to proceed]
+The Ticket Booth is a room. The description of the ticket booth is "You are standing in line about to buy a ticket for the amusement park of your dreams! You can see the plaza up ahead to the north.". The player is in the ticket booth.
+
+Jar Jar Binks is a man in the ticket booth."[if the player is not carrying the entry ticket]Jar Jar has what you need[else]Jar Jar stares intensely at you[end if]". The entry ticket is a thing. Jar Jar Binks is carrying the entry ticket.
+
+Understand "entry ticket" or "the entry ticket" or "admission" or "ticket" as "[entry]".
+
+Instead of asking Jar Jar Binks about "[entry]":
+		now the player is carrying the entry ticket;
+		say "Jar Jar said nothing, and handed you a ticket."
+		
+Instead of going north when the player is not carrying the entry ticket:
+		say "You can't just get into the amusement park without a ticket! You should ask Jar Jar about an entry ticket".	
+		
+After going north when the player is carrying the entry ticket:
+		say "You approach the turnstile and someone beeps the ticket with a scanner thing";	
+		continue the action.
+
+
+
+
+
+
+[Once the player has the ticket, they can go to the plaza. Here they need to pick up the key and use it to open the treasure chest. Once they do that, they can find the pop corn, eat is and win. ]
+The Plaza is a room. "You can smell the something delicious in the air." The plaza is north of the ticket booth.
+
+The treasure chest is a fixed in place locked container in the plaza. "You see an ornately decorated treasue chest. You can't help but wonder if this amusement park wants you to steal what is inside."
+
+The key is a thing in the plaza. The key unlocks the treasure chest.
+
+Pop corn is an edible thing in the treasure chest. "The pop corn glistens in the sun. You totally wanna eat it."
+		
+After taking the pop corn:
+		say "You are victorious! [if the hunger of the player is greater than 15]But you are still hungry[else]You really enjoyed the pop corn.[end if]";
+		
+	
+After eating the pop corn when the hunger of the player is less than 10:
+		say "It is salty and sweet. Mmmmm.";
+		now the hunger of the player is the hunger of the player - 5;
+		say "Your hunger is now [hunger of the player]. Your tummy is no longer grumbly.";
+		end the story.
+		
+		
+
+
+
+
+[This is how you create test sequences so you don't have to type all the commands every time in order to get to a certain state in the game. Type "test getToOpenChest" to the prompt to run through the list of commands.]
+Test getToOpenChest with "ask jar jar about admission / go north / take key / unlock treasure chest with key/ open treasure chest"
